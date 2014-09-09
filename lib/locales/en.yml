@@ -1,2 +1,5 @@
 names:
-  - {name: "Mary", sex: "F", count: 7065 }
+  given:
+    - {name: "Mary", sex: "F", count: 7065}
+  surname:
+    - {name: "Johnson", count: 16000}
