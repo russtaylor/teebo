@@ -9,8 +9,8 @@ class Teebo
 
   def sum_count
     sum = 0
-    for element in @en.names.given
-      sum += element.count
+    @en['names']['given'].each do |element|
+      sum += element['count']
     end
     puts sum
   end
