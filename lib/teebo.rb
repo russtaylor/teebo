@@ -12,11 +12,11 @@ class Teebo
 
   end
 
-  def sum_count
-    count = @database.execute <<-SQL
-      select sum(count) from 'given_names' where sex = 'F'
+  def sum_count sex
+    statement = <<-SQL
+      select sum(count) from 'given_names' where sex = ?
     SQL
-    print count
+    count = @database.execute(statement, sex)
   end
 
 end
