@@ -7,6 +7,10 @@ class Teebo
     @en = YAML::load_file(File.join(__dir__, 'locales', 'en.yml'))
   end
 
+  def weight
+
+  end
+
   def sum_count
     sum = 0
     @en['names']['given'].each do |element|
