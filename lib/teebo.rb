@@ -1,4 +1,5 @@
 require 'yaml'
+require 'sqlite3'
 
 class Teebo
 

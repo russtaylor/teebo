@@ -10,4 +10,6 @@ Gem::Specification.new do |s|
   s.homepage    =
     'http://rubygems.org/gems/teebo'
   s.license       = 'MIT'
+
+  s.add_runtime_dependency "sqlite3", "~>1.3.9"
 end
