@@ -6,10 +6,9 @@ Gem::Specification.new do |s|
   s.description = "Contains basic functionality for data generation."
   s.authors     = ["Russ Taylor"]
   s.email       = 'russ@russt.me'
-  s.files       = ["lib/teebo.rb"]
-  s.homepage    =
-    'http://rubygems.org/gems/teebo'
-  s.license       = 'MIT'
+  s.files       = ['lib/teebo.rb', 'lib/data/seed-data.db', 'lib/teebo/name.rb']
+  s.homepage    = 'http://rubygems.org/gems/teebo'
+  s.license     = 'MIT'
 
   s.add_runtime_dependency "sqlite3", "~>1.3", ">= 1.3.9"
 end
