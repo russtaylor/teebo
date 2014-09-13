@@ -27,7 +27,7 @@ module Teebo
 
         count = 0
         @database.execute(get_rows, sex) do |row|
-          count += row[3]
+          count += row['count']
           database.execute(put_count_to, count, row[0])
         end
       end
