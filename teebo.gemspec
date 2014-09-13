@@ -11,5 +11,5 @@ Gem::Specification.new do |s|
     'http://rubygems.org/gems/teebo'
   s.license       = 'MIT'
 
-  s.add_runtime_dependency "sqlite3", "~>1.3.9"
+  s.add_runtime_dependency "sqlite3", "~>1.3", ">= 1.3.9"
 end

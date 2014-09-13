@@ -35,4 +35,4 @@ module Teebo
   end
 end
 
-require_relative 'teebo/name'
+require 'teebo/name'
