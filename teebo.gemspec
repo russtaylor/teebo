@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name        = 'teebo'
-  s.version     = '0.0.0'
-  s.date        = '2014-09-09'
+  s.version     = '0.0.1'
+  s.date        = '2014-09-12'
   s.summary     = "Teebo gem."
   s.description = "Contains basic functionality for data generation."
   s.authors     = ["Russ Taylor"]
