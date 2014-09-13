@@ -1,22 +1,38 @@
-require 'yaml'
 require 'sqlite3'
 
-class Teebo
+module Teebo
 
-  def initialize
-    # Initialize the database
-    @database = SQLite3::Database.new "lib/data/seed-data.db"
+  class Base
+
+    def initialize
+      # Initialize the database
+      @@database = SQLite3::Database.new "lib/data/seed-data.db"
+      @@database.results_as_hash = true
+    end
+
+    def weight
+
+    end
+
+    def update_sum_count
+      sexes = ['M', 'F']
+      sexes.each do |sex|
+        get_rows = <<-SQL
+          select * from given_names where sex = ?
+        SQL
+
+        put_count_to = <<-SQL
+          update given_names set count_to = ? where id = ?
+        SQL
+
+        count = 0
+        @database.execute(get_rows, sex) do |row|
+          count += row[3]
+          database.execute(put_count_to, count, row[0])
+        end
+      end
+    end
   end
-
-  def weight
-
-  end
-
-  def sum_count sex
-    statement = <<-SQL
-      select sum(count) from 'given_names' where sex = ?
-    SQL
-    count = @database.execute(statement, sex)
-  end
-
 end
+
+require_relative 'teebo/name'
