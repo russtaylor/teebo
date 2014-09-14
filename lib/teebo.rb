@@ -14,7 +14,7 @@ module Teebo
 
     end
 
-    def update_sum_count
+    def update_given_name_sum_count
       sexes = ['M', 'F']
       sexes.each do |sex|
         get_rows = <<-SQL
@@ -26,10 +26,26 @@ module Teebo
         SQL
 
         count = 0
-        @database.execute(get_rows, sex) do |row|
+        @@database.execute(get_rows, sex) do |row|
           count += row['count']
-          database.execute(put_count_to, count, row[0])
+          @@database.execute(put_count_to, count, row[0])
         end
+      end
+    end
+
+    def update_surname_sum_count
+      get_rows = <<-SQL
+        select * from surnames
+      SQL
+
+      put_count_to = <<-SQL
+        update surnames set count_to = ? where id = ?
+      SQL
+
+      count = 0
+      @@database.execute(get_rows) do |row|
+        count += row['count']
+        @@database.execute(put_count_to, count, row[0])
       end
     end
   end
