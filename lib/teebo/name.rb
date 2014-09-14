@@ -26,8 +26,21 @@ module Teebo
       SQL
 
       count = sum_count sex
-      rand = rand(count)
-      return @@database.execute(find_range_query, sex, rand)[0]['name']
+      selection = rand(count)
+      return @@database.execute(find_range_query, sex, selection)[0]['name']
+    end
+
+    #
+    # Selects a random (weighted) surname from the database.
+    #
+    def surname
+      find_range_query = <<-SQL
+        select * from surnames where (count_to - ?) >= 0 order by id limit 1
+      SQL
+
+      count = @@database.execute('select sum(count) from surnames')[0][0]
+      selection = rand(count)
+      return @@database.execute(find_range_query, selection)[0]['name']
     end
   end
 end
