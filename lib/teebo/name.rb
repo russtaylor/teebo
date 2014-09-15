@@ -8,8 +8,11 @@ module Teebo
     #
     # Picks a random full name, selecting a random gender if it's not specified.
     #
-    def name sex
-      
+    def name sex=nil
+      if sex.nil?
+        sex = ['M', 'F'].sample
+      end
+      given_name(sex) + " " + surname
     end
 
     #
