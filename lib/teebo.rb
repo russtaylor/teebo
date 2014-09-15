@@ -6,8 +6,8 @@ module Teebo
 
     def initialize
       # Initialize the database
-      @@database = SQLite3::Database.new "lib/data/seed-data.db"
-      @@database.results_as_hash = true
+      @database = SQLite3::Database.new "lib/data/seed-data.db"
+      @database.results_as_hash = true
     end
 
   end

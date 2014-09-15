@@ -6,13 +6,20 @@ module Teebo
   class Name < Base
 
     #
+    # Picks a random full name, selecting a random gender if it's not specified.
+    #
+    def name sex
+      
+    end
+
+    #
     # Finds the total count for the number of names in the database.
     #
     def sum_count sex
       find_count = <<-SQL
         select sum(count) from 'given_names' where sex = ?
       SQL
-      return @@database.execute(find_count, sex)[0][0]
+      @database.execute(find_count, sex)[0][0]
     end
 
     #
@@ -27,7 +34,7 @@ module Teebo
 
       count = sum_count sex
       selection = rand(count)
-      return @@database.execute(find_range_query, sex, selection)[0]['name']
+      @database.execute(find_range_query, sex, selection)[0]['name']
     end
 
     #
@@ -38,9 +45,9 @@ module Teebo
         select * from surnames where (count_to - ?) >= 0 order by id limit 1
       SQL
 
-      count = @@database.execute('select sum(count) from surnames')[0][0]
+      count = @database.execute('select sum(count) from surnames')[0][0]
       selection = rand(count)
-      return @@database.execute(find_range_query, selection)[0]['name']
+      @database.execute(find_range_query, selection)[0]['name']
     end
   end
 end
