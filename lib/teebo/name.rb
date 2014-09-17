@@ -6,13 +6,31 @@ module Teebo
   class Name < Base
 
     #
-    # Picks a random full name, selecting a random gender if it's not specified.
+    # Picks a random first & last name, selecting a random gender if it's not
+    # specified.
     #
     def name sex=nil
       if sex.nil?
         sex = ['M', 'F'].sample
       end
       given_name(sex) + " " + surname
+    end
+
+    #
+    # Generates a normal full name, including a middle name.
+    #
+    # For now, this is fairly sloppy, as the probability that a middle name will
+    # simply be another given name of the same gender is almost certainly less
+    # than 100%.
+    #
+    # TODO: Make this take into account different probablities of different
+    #       types of middle names.
+    #
+    def full_name sex=nil
+      if sex.nil?
+        sex = ['M', 'F'].sample
+      end
+      given_name(sex) + " " + given_name(sex) + " " + surname
     end
 
     #
