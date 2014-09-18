@@ -9,11 +9,11 @@ module Teebo
     # Picks a random first & last name, selecting a random gender if it's not
     # specified.
     #
-    def name sex=nil
+    def name (sex=nil)
       if sex.nil?
-        sex = ['M', 'F'].sample
+        sex = %w(M F).sample
       end
-      given_name(sex) + " " + surname
+      given_name(sex) + ' ' + surname
     end
 
     #
@@ -26,17 +26,17 @@ module Teebo
     # TODO: Make this take into account different probablities of different
     #       types of middle names.
     #
-    def full_name sex=nil
+    def full_name(sex=nil)
       if sex.nil?
-        sex = ['M', 'F'].sample
+        sex = %w(M F).sample
       end
-      given_name(sex) + " " + given_name(sex) + " " + surname
+      given_name(sex) + ' ' + given_name(sex) + ' ' + surname
     end
 
     #
     # Finds the total count for the number of names in the database.
     #
-    def sum_count sex
+    def sum_count(sex)
       find_count = <<-SQL
         select sum(count) from 'given_names' where sex = ?
       SQL
@@ -46,7 +46,7 @@ module Teebo
     #
     # Selects a random (weighted) given name from the database.
     #
-    def given_name sex
+    def given_name(sex)
       find_range_query = <<-SQL
         select * from given_names where sex = ?
           and (count_to - ?) >= 0
