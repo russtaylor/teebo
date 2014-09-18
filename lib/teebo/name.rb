@@ -23,10 +23,9 @@ module Teebo
     # simply be another given name of the same gender is almost certainly less
     # than 100%.
     #
-    # TODO: Make this take into account different probablities of different
-    #       types of middle names.
-    #
     def full_name(sex=nil)
+      # TODO: Make this take into account different probabilities of different
+      # types of middle names.
       if sex.nil?
         sex = %w(M F).sample
       end
@@ -37,10 +36,7 @@ module Teebo
     # Finds the total count for the number of names in the database.
     #
     def sum_count(sex)
-      find_count = <<-SQL
-        select sum(count) from 'given_names' where sex = ?
-      SQL
-      @database.execute(find_count, sex)[0][0]
+      @db_connection.get_count('given_names', 'count', [:row => 'sex', :condition => sex])
     end
 
     #
