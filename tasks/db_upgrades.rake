@@ -1,10 +1,10 @@
 require 'sqlite3'
 
-$database = SQLite3::Database.new "../lib/data/seed-data.db"
+$database = SQLite3::Database.new '../lib/data/seed-data.db'
 $database.results_as_hash = true
 
 def update_given_name_sum_count
-  sexes = ['M', 'F']
+  sexes = %w(M F)
   sexes.each do |sex|
     get_rows = <<-SQL
       select * from given_names where sex = ?
