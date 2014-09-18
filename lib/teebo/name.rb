@@ -36,7 +36,7 @@ module Teebo
     # Finds the total count for the number of names in the database.
     #
     def sum_count(sex)
-      @db_connection.get_count('given_names', 'count', [:row => 'sex', :condition => sex])
+      @db_connection.get_sum('given_names', 'count', [row: 'sex', condition: sex])
     end
 
     #

@@ -10,7 +10,12 @@ module Teebo
       @database.results_as_hash = true
     end
 
-    def get_count(table_name, row_name, where_clause=nil)
+    #
+    # Retrieves the sum of the specified column in the database. Optionally, a 'where' clause may
+    # be specified to restrict the sum to rows meeting a specified condition. Note that at present,
+    # only where clauses with one condition and an '=' comparison are supported.
+    #
+    def get_sum(table_name, row_name, where_clause=nil)
       where_statement = ''
       unless where_clause.nil?
         where_statement = "where #{where_clause[:row]} = #{where_clause[:condition]}"
