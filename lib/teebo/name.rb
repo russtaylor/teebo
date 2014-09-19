@@ -1,5 +1,3 @@
-require '../teebo'
-
 module Teebo
   #
   # Generates names in accordance with their frequency in the United States

@@ -9,5 +9,5 @@ module Teebo
   end
 end
 
-require 'teebo/generator_database'
+require 'teebo/database_handler'
 require 'teebo/name'
