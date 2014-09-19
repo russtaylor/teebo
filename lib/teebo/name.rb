@@ -63,7 +63,7 @@ module Teebo
         select * from surnames where (count_to - ?) >= 0 order by id limit 1
       SQL
 
-      count = @db_connection.database.execute('select sum(count) from surnames')[0][0]
+      count = @db_connection.get_sum('surnames', 'count')
       selection = rand(count)
       @db_connection.database.execute(find_range_query, selection)[0]['name']
     end
