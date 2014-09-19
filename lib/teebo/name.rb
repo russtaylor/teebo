@@ -42,28 +42,18 @@ module Teebo
     # Selects a random (weighted) given name from the database.
     #
     def given_name(sex)
-      find_range_query = <<-SQL
-        select * from given_names where sex = ?
-          and (count_to - ?) >= 0
-          order by id limit 1
-      SQL
-
       count = sum_count(sex)
       selection = rand(count)
-      @db_connection.database.execute(find_range_query, sex, selection)[0]['name']
+      @db_connection.get_row_at('given_names', 'count_to', selection, {column:'sex', condition:sex})['name']
     end
 
     #
     # Selects a random (weighted) surname from the database.
     #
     def surname
-      find_range_query = <<-SQL
-        select * from surnames where (count_to - ?) >= 0 order by id limit 1
-      SQL
-
       count = @db_connection.get_sum('surnames', 'count')
       selection = rand(count)
-      @db_connection.database.execute(find_range_query, selection)[0]['name']
+      @db_connection.get_row_at('surnames', 'count_to', selection)['name']
     end
   end
 end

@@ -29,5 +29,23 @@ module Teebo
 
       @database.execute(statement)[0][0]
     end
+
+    #
+    # Retrieves the one row from the database where the specified number fits into this row's
+    # 'count_to' range.
+    #
+    def get_row_at(table_name, count_column, count_value, where_clause=nil)
+      where_statement = ''
+      unless where_clause.nil?
+        where_statement = "and #{where_clause[:column]} = '#{where_clause[:condition]}'"
+      end
+      statement = <<-SQL
+        select * from #{table_name} where (#{count_column} - #{count_value}) >= 0
+        #{where_statement}
+        order by id limit 1
+      SQL
+
+      @database.execute(statement)[0]
+    end
   end
 end
