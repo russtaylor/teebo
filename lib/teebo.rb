@@ -2,10 +2,14 @@ require 'sqlite3'
 
 module Teebo
 
-  class Base
-    @db_connection = Teebo::Database.new
+  class TeeboGenerator
+    attr_accessor :db_connection
+
+    def initialize
+      @db_connection = Teebo::GeneratorDatabase.new
+    end
   end
 end
 
-require 'teebo/database'
+require 'teebo/generator_database'
 require 'teebo/name'

@@ -1,9 +1,11 @@
+require '../teebo'
+
 module Teebo
   #
   # Generates names in accordance with their frequency in the United States
   # population.
   #
-  class Name < Base
+  class Name < TeeboGenerator
 
     #
     # Picks a random first & last name, selecting a random gender if it's not
@@ -24,8 +26,7 @@ module Teebo
     # than 100%.
     #
     def full_name(sex=nil)
-      # TODO: Make this take into account different probabilities of different
-      # types of middle names.
+      # TODO: Take into account different probabilities of different types of middle names.
       if sex.nil?
         sex = %w(M F).sample
       end
@@ -51,7 +52,7 @@ module Teebo
 
       count = sum_count sex
       selection = rand(count)
-      @database.execute(find_range_query, sex, selection)[0]['name']
+      @db_connection.database.execute(find_range_query, sex, selection)[0]['name']
     end
 
     #
@@ -62,9 +63,9 @@ module Teebo
         select * from surnames where (count_to - ?) >= 0 order by id limit 1
       SQL
 
-      count = @database.execute('select sum(count) from surnames')[0][0]
+      count = @db_connection.database.execute('select sum(count) from surnames')[0][0]
       selection = rand(count)
-      @database.execute(find_range_query, selection)[0]['name']
+      @db_connection.database.execute(find_range_query, selection)[0]['name']
     end
   end
 end

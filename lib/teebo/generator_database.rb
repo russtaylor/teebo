@@ -4,7 +4,7 @@ module Teebo
   # throughout the codebase.
   #
   # Author:: Russ Taylor (mailto:russ@russt.me)
-  class Database
+  class GeneratorDatabase
     def initialize
       @database = SQLite3::Database.new 'lib/data/seed-data.db'
       @database.results_as_hash = true
@@ -21,8 +21,7 @@ module Teebo
         where_statement = "where #{where_clause[:row]} = #{where_clause[:condition]}"
       end
       statement = <<-SQL
-        select count(#{row_name}) from #{table_name}
-        #{where_statement}
+        select count(#{row_name}) from #{table_name} #{where_statement}
       SQL
 
       @database.execute(statement)[0][0]
