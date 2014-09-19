@@ -18,12 +18,12 @@ module Teebo
     def get_sum(table_name, row_name, where_clause=nil)
       where_statement = ''
       unless where_clause.nil?
-        where_statement = "where #{where_clause[:row]} = #{where_clause[:condition]}"
+        where_statement = "where '#{where_clause[:column]}' = '#{where_clause[:condition]}'"
       end
       statement = <<-SQL
-        select count(#{row_name}) from #{table_name} #{where_statement}
+        select sum(#{row_name}) from #{table_name} #{where_statement}
       SQL
-
+      
       @database.execute(statement)[0][0]
     end
   end
