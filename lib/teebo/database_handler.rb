@@ -5,6 +5,9 @@ module Teebo
   #
   # Author:: Russ Taylor (mailto:russ@russt.me)
   class DatabaseHandler
+
+    attr_accessor(:database)
+
     def initialize
       @database = SQLite3::Database.new 'lib/data/seed-data.db'
       @database.results_as_hash = true
@@ -18,12 +21,12 @@ module Teebo
     def get_sum(table_name, row_name, where_clause=nil)
       where_statement = ''
       unless where_clause.nil?
-        where_statement = "where '#{where_clause[:column]}' = '#{where_clause[:condition]}'"
+        where_statement = "where #{where_clause[:column]} = '#{where_clause[:condition]}'"
       end
       statement = <<-SQL
         select sum(#{row_name}) from #{table_name} #{where_statement}
       SQL
-      
+
       @database.execute(statement)[0][0]
     end
   end
