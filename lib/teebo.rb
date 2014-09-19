@@ -4,7 +4,7 @@ module Teebo
 
   class TeeboGenerator
     def initialize
-      @db_connection = Teebo::GeneratorDatabase.new
+      @db_connection = Teebo::DatabaseHandler.new
     end
   end
 end

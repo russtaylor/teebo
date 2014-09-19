@@ -4,7 +4,7 @@ module Teebo
   # throughout the codebase.
   #
   # Author:: Russ Taylor (mailto:russ@russt.me)
-  class GeneratorDatabase
+  class DatabaseHandler
     def initialize
       @database = SQLite3::Database.new 'lib/data/seed-data.db'
       @database.results_as_hash = true

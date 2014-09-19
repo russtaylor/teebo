@@ -50,7 +50,7 @@ module Teebo
           order by id limit 1
       SQL
 
-      count = sum_count sex
+      count = sum_count(sex)
       selection = rand(count)
       @db_connection.database.execute(find_range_query, sex, selection)[0]['name']
     end
