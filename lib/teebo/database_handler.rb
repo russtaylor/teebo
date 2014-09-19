@@ -6,8 +6,6 @@ module Teebo
   # Author:: Russ Taylor (mailto:russ@russt.me)
   class DatabaseHandler
 
-    attr_accessor(:database)
-
     def initialize
       @database = SQLite3::Database.new 'lib/data/seed-data.db'
       @database.results_as_hash = true
