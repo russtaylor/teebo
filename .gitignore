@@ -23,6 +23,7 @@ build/
 ## Environment normalisation:
 /.bundle/
 /lib/bundler/man/
+Gemfile.lock
 
 # For RubyMine
 .idea/
