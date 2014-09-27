@@ -1,8 +1,9 @@
 module Teebo
   #
-  # A basic implementation of the Box-Muller transform. Adapted from 
+  # A basic implementation of the Box-Muller transform. Adapted from an answer by antonakos on
+  # Stack Overflow here: http://stackoverflow.com/questions/5825680
   #
-  class RandomGaussian
+  class Gaussian
     def initialize(mean, stddev, rand_helper = lambda { Kernel.rand })
       @rand_helper = rand_helper
       @mean = mean
