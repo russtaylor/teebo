@@ -20,8 +20,8 @@ module Teebo
     # Generates a number according to Benford's law, meaning that it is more indicative of numbers
     # encountered in real life.
     #
-    def benford_dist(low, high)
-      (10**Random.rand).floor
+    def benford_dist(upper_bound, decimals=0)
+      (upper_bound**Random.rand).round(decimals)
     end
 
   end
