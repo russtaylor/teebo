@@ -13,6 +13,7 @@ Gem::Specification.new do |s|
   s.files       = %w(
     lib/teebo.rb
     lib/teebo/name.rb
+    lib/teebo/number.rb
     lib/teebo/database_handler.rb
     lib/data/seed-data.db
   )

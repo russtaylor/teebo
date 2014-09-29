@@ -11,3 +11,4 @@ end
 
 require 'teebo/database_handler'
 require 'teebo/name'
+require 'teebo/number'
