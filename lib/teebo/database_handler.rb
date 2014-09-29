@@ -32,7 +32,7 @@ module Teebo
     # Retrieves the one row from the database where the specified number fits into this row's
     # 'count_to' range.
     #
-    def get_row_at(table_name, count_column, count_value, where_clause=nil)
+    def get_row_for_count(table_name, count_column, count_value, where_clause=nil)
       where_statement = ''
       unless where_clause.nil?
         where_statement = "and #{where_clause[:column]} = '#{where_clause[:condition]}'"

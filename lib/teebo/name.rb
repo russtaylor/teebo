@@ -47,7 +47,7 @@ module Teebo
     def given_name(sex)
       count = sum_count(sex)
       selection = rand(count)
-      @db_connection.get_row_at(GIVEN_NAMES_TABLE, 'count_to', selection,
+      @db_connection.get_row_for_count(GIVEN_NAMES_TABLE, 'count_to', selection,
                                 {column: 'sex', condition: sex})['name']
     end
 
@@ -57,7 +57,7 @@ module Teebo
     def surname
       count = @db_connection.get_sum(SURNAMES_TABLE, 'count')
       selection = rand(count)
-      @db_connection.get_row_at(SURNAMES_TABLE, 'count_to', selection)['name']
+      @db_connection.get_row_for_count(SURNAMES_TABLE, 'count_to', selection)['name']
     end
   end
 end
