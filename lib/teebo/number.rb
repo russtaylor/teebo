@@ -16,5 +16,13 @@ module Teebo
       mean + scale * Math.cos(theta)
     end
 
+    #
+    # Generates a number according to Benford's law, meaning that it is more indicative of numbers
+    # encountered in real life.
+    #
+    def benford_dist(low, high)
+      (10**Random.rand).floor
+    end
+
   end
 end
