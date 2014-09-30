@@ -16,13 +16,13 @@ module Teebo
     # be specified to restrict the sum to rows meeting a specified condition. Note that at present,
     # only where clauses with one condition and an '=' comparison are supported.
     #
-    def get_sum(table_name, row_name, where_clause=nil)
+    def get_sum(table_name, column_name, where_clause=nil)
       where_statement = ''
       unless where_clause.nil?
         where_statement = "where #{where_clause[:column]} = '#{where_clause[:condition]}'"
       end
       statement = <<-SQL
-        select sum(#{row_name}) from #{table_name} #{where_statement}
+        select sum(#{column_name}) from #{table_name} #{where_statement}
       SQL
 
       @database.execute(statement)[0][0]
