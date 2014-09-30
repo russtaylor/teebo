@@ -1,0 +1,32 @@
+---
+- credit-card
+  issuers:
+    - American Express
+      iin-prefixes:
+      - 34
+      - 37
+      lengths:
+      - 15
+      validation: yes
+    - Discover Card
+      iin-prefixes:
+      - 6011
+      - !ruby/range 622126...622925
+      - !ruby/range 644...649
+      - 65
+      lengths:
+      - 16
+      validation: yes
+    - MasterCard
+      iin-prefixes:
+      - !ruby/range 51...55
+      lengths:
+      - 16
+      validation: yes
+    - Visa
+      iin-prefixes:
+      - 4
+      lengths:
+      - 13
+      - 16
+      validation: yes
