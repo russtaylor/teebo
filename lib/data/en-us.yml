@@ -9,6 +9,7 @@
       - 15
       validation: yes
       probability: .092
+      cvc-length: 4
     - Discover Card
       iin-prefixes:
       - 6011
@@ -19,6 +20,7 @@
       - 16
       validation: yes
       probability: .107
+      cvc-length: 3
     - MasterCard
       iin-prefixes:
       - !ruby/range 51...55
@@ -26,6 +28,7 @@
       - 16
       validation: yes
       probability: .313
+      cvc-length: 3
     - Visa
       iin-prefixes:
       - 4
@@ -34,3 +37,4 @@
       - 16
       validation: yes
       probability: .488
+      cvc-length: 3
