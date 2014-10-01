@@ -1,10 +1,12 @@
 require 'sqlite3'
+require 'yaml'
 
 module Teebo
 
   class TeeboGenerator
     def initialize
       @db_connection = Teebo::DatabaseHandler.new
+      @yaml_mapping = YAML::load(File.open('lib/data/en-us.yml'))
     end
   end
 end

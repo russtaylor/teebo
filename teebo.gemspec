@@ -15,6 +15,7 @@ Gem::Specification.new do |s|
     lib/teebo/name.rb
     lib/teebo/number.rb
     lib/teebo/database_handler.rb
+    lib/data/en-us.yml
     lib/data/seed-data.db
   )
   s.homepage    = 'http://github.com/russtaylor/teebo'

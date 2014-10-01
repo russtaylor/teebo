@@ -1,40 +1,43 @@
 ---
-- credit-card
-  issuers:
-    - American Express
-      iin-prefixes:
+- credit-card-issuers:
+  - 
+    name: American Express
+    iin-prefixes:
       - 34
       - 37
-      lengths:
+    lengths:
       - 15
-      validation: yes
-      probability: .092
-      cvc-length: 4
-    - Discover Card
-      iin-prefixes:
+    validation: yes
+    probability: .092
+    cvc-length: 4
+  - 
+    name: Discover Card
+    iin-prefixes:
       - 6011
       - !ruby/range 622126...622925
       - !ruby/range 644...649
       - 65
-      lengths:
+    lengths:
       - 16
-      validation: yes
-      probability: .107
-      cvc-length: 3
-    - MasterCard
-      iin-prefixes:
+    validation: yes
+    probability: .107
+    cvc-length: 3
+  - 
+    name: MasterCard
+    iin-prefixes:
       - !ruby/range 51...55
-      lengths:
+    lengths:
       - 16
-      validation: yes
-      probability: .313
-      cvc-length: 3
-    - Visa
-      iin-prefixes:
+    validation: yes
+    probability: .313
+    cvc-length: 3
+  - 
+    name: Visa
+    iin-prefixes:
       - 4
-      lengths:
+    lengths:
       - 13
       - 16
-      validation: yes
-      probability: .488
-      cvc-length: 3
+    validation: yes
+    probability: .488
+    cvc-length: 3
