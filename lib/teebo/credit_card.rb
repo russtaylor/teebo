@@ -5,6 +5,34 @@ module Teebo
   # that the credit card numbers are actually valid.
   #
   class CreditCard < TeeboGenerator
-    
+
+    def initialize
+      super
+      @cc_issuers = @yaml_mapping['credit-card-issuers']
+    end
+
+    #
+    # Returns a credit card issuer according to the likelihood that it would be seen in the wild.
+    #
+    def weighted_issuer
+      random_choice = Random.rand
+      full_weight = 0
+      @cc_issuers.each do |issuer|
+        full_weight += issuer['probability']
+        if random_choice < full_weight
+          return issuer
+        end
+      end
+    end
+
+    #
+    # Generates a credit card number according to the pattern specified in the 'issuer' passed in.
+    #
+    def generate_number(issuer)
+      prefix = issuer['iin-prefixes'].sample
+      length = issuer['lengths'].sample
+      puts prefix, length
+    end
+
   end
 end
