@@ -12,13 +12,8 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib']
   s.files       = %w(
     lib/teebo.rb
-    lib/teebo/name.rb
-    lib/teebo/number.rb
-    lib/teebo/credit_card.rb
-    lib/teebo/database_handler.rb
-    lib/data/en-us.yml
-    lib/data/seed-data.db
   )
+  s.files       += Dir['lib/teebo/*']
   s.homepage    = 'http://github.com/russtaylor/teebo'
   s.license     = 'MIT'
 
