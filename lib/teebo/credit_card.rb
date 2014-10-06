@@ -29,10 +29,13 @@ module Teebo
     # Generates a credit card number according to the pattern specified in the 'issuer' passed in.
     #
     def generate_number(issuer)
+      # TODO: Sample according to realistic distribution - numbers w/long prefixes are prioritized too highly right now.
       prefix = issuer['iin-prefixes'].sample
       length = issuer['lengths'].sample
       puts prefix, length
     end
+
+
 
   end
 end

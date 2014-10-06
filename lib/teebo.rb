@@ -1,5 +1,6 @@
 require 'sqlite3'
 require 'yaml'
+require 'randexp'
 
 module Teebo
 

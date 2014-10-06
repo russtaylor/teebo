@@ -23,4 +23,5 @@ Gem::Specification.new do |s|
   s.license     = 'MIT'
 
   s.add_runtime_dependency 'sqlite3', '~>1.3', '>= 1.3.9'
+  s.add_runtime_dependency 'randexp', '~>0.1.7'
 end
