@@ -14,7 +14,7 @@ module Teebo
     #
     # Returns a credit card issuer according to the likelihood that it would be seen in the wild.
     #
-    def issuer
+    def generate_issuer
       random_choice = Random.rand
       full_weight = 0
       @cc_issuers.each do |issuer|
@@ -28,14 +28,41 @@ module Teebo
     #
     # Generates a credit card number according to the pattern specified in the 'issuer' passed in.
     #
-    def number(issuer)
+    def generate_number(issuer)
       # TODO: Sample according to realistic distribution - numbers w/long prefixes are prioritized too highly right now.
       prefix = issuer['iin-prefixes'].sample
       length = issuer['lengths'].sample
-      puts prefix, length
+      digits_needed = length - prefix.to_s.length - 1
+      generated = number_to_digits(digits_needed)
+      number = prefix.to_s + generated
+      check_digit = luhn_algorithm(number.to_i)
+      puts number + check_digit
     end
 
+    #
+    # Gets the sum of the digits of the specified number. Necessary to calculate a credit card's
+    # check digit.
+    #
+    def sum_digits(number)
+      number.to_s.split(//).inject(0) do |result, element|
+        result + element.to_i
+      end
+    end
 
+    #
+    # A simple implementation of the [Luhn algorithm](http://en.wikipedia.org/wiki/Luhn_algorithm),
+    # which all U.S.-based Credit Card issuers use for the validation check on credit card numbers.
+    #
+    def luhn_algorithm(number)
+      digit_sum = sum_digits(number)
+      (10 - (digit_sum % 10)).to_s
+    end
 
+    #
+    #
+    #
+    def number_to_digits(digits)
+      rand(10 ** digits).to_s.rjust(digits,'0')
+    end
   end
 end
