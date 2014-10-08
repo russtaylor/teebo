@@ -10,10 +10,9 @@ Gem::Specification.new do |s|
   s.authors     = ['Russ Taylor']
   s.email       = 'russ@russt.me'
   s.require_paths = ['lib']
-  s.files       = %w(
-    lib/teebo.rb
-  )
+  s.files       = ['lib/teebo.rb']
   s.files       += Dir['lib/teebo/*']
+  s.files       += Dir['lib/data/*']
   s.homepage    = 'http://github.com/russtaylor/teebo'
   s.license     = 'MIT'
 

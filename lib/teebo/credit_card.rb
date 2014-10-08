@@ -14,7 +14,7 @@ module Teebo
     #
     # Returns a credit card issuer according to the likelihood that it would be seen in the wild.
     #
-    def weighted_issuer
+    def issuer
       random_choice = Random.rand
       full_weight = 0
       @cc_issuers.each do |issuer|
@@ -28,7 +28,7 @@ module Teebo
     #
     # Generates a credit card number according to the pattern specified in the 'issuer' passed in.
     #
-    def generate_number(issuer)
+    def number(issuer)
       # TODO: Sample according to realistic distribution - numbers w/long prefixes are prioritized too highly right now.
       prefix = issuer['iin-prefixes'].sample
       length = issuer['lengths'].sample
