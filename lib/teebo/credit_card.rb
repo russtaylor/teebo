@@ -43,10 +43,11 @@ module Teebo
     # Gets the sum of the digits of the specified number. Necessary to calculate a credit card's
     # check digit.
     #
-    def sum_digits(number)
-      number.to_s.split(//).inject(0) do |result, element|
-        result + element.to_i
-      end
+    def luhn_sum(number)
+      digits = number.to_s.chars.map(&:to_i)
+      digits.reverse.each_slice(2).map do |x, y|
+        [(x * 2).divmod(10), y || 0]
+      end.flatten.inject(:+)
     end
 
     #
@@ -54,7 +55,7 @@ module Teebo
     # which all U.S.-based Credit Card issuers use for the validation check on credit card numbers.
     #
     def luhn_algorithm(number)
-      digit_sum = sum_digits(number)
+      digit_sum = luhn_sum(number)
       (10 - (digit_sum % 10)).to_s
     end
 
