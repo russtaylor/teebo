@@ -57,7 +57,7 @@ module Teebo
     #
     def luhn_algorithm(number)
       digit_sum = luhn_sum(number)
-      (10 - (digit_sum % 10)).to_s
+      ((10 - digit_sum % 10) % 10).to_s
     end
 
     #
