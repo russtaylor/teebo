@@ -30,13 +30,14 @@ module Teebo
     #
     def generate_number(issuer)
       # TODO: Sample according to realistic distribution - numbers w/long prefixes are prioritized too highly right now.
-      prefix = issuer['iin-prefixes'].sample
+      prefix = issuer['iin-prefixes'].sample.to_s
       length = issuer['lengths'].sample
-      digits_needed = length - prefix.to_s.length - 1
-      generated = number_to_digits(digits_needed)
-      number = prefix.to_s + generated
-      check_digit = luhn_algorithm(number.to_i)
-      puts number + check_digit
+      generated = number_to_digits(length - prefix.length)
+      number = prefix + generated
+      if issuer['validation']
+        last_digit_validation(number)
+      end
+
     end
 
     #
@@ -60,9 +61,21 @@ module Teebo
     end
 
     #
+    # Uses the Luhn algorithm to replace the last digit in the generated number with the correct
+    # check digit.
     #
+    def last_digit_validation(number)
+      trimmed_number = number[0..-2]
+      check_digit = luhn_algorithm(trimmed_number)
+      trimmed_number + check_digit
+    end
+
+    #
+    # Generates a random number with the specified number of digits, padding the beginning with
+    # '0' characters, if necessary.
     #
     def number_to_digits(digits)
+      digits = digits.to_i
       rand(10 ** digits).to_s.rjust(digits,'0')
     end
   end
