@@ -3,7 +3,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |s|
   s.name        = 'teebo'
-  s.version     = '0.0.4'
+  s.version     = '0.0.5'
   s.date        = '2014-09-12'
   s.summary     = 'Teebo gem.'
   s.description = 'Contains basic functionality for data generation.'
