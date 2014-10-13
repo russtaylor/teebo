@@ -18,7 +18,8 @@ module Teebo
       [
           'issuer' => issuer['name'],
           'number' => generate_number(issuer),
-          'cvv' => generate_cvv_code(issuer)
+          'cvv' => generate_cvv_code(issuer),
+          'expiration' => generate_expiration_date
       ]
     end
 
@@ -99,7 +100,7 @@ module Teebo
 
     #
     # Generates an expiration date for a credit card. These dates are, somewhat arbitrarily, simply
-    # some time in the next 5 years. 
+    # some time in the next 5 years.
     #
     def generate_expiration_date
       current_year = Time.now.year - 2000
