@@ -11,6 +11,17 @@ module Teebo
       @cc_issuers = @yaml_mapping['credit-card-issuers']
     end
 
+    def generate_card(issuer=nil)
+      if issuer == nil
+        issuer = generate_issuer
+      end
+      [
+          'issuer' => issuer['name'],
+          'number' => generate_number(issuer),
+          'cvv' => generate_cvv_code(issuer)
+      ]
+    end
+
     #
     # Returns a credit card issuer according to the likelihood that it would be seen in the wild.
     #
@@ -32,17 +43,16 @@ module Teebo
       # TODO: Sample according to realistic distribution - numbers w/long prefixes are prioritized too highly right now.
       prefix = issuer['iin-prefixes'].sample.to_s
       length = issuer['lengths'].sample
-      generated = number_to_digits(length - prefix.length)
+      generated = number_with_length(length - prefix.length)
       number = prefix + generated
       if issuer['validation']
         last_digit_validation(number)
       end
-
     end
 
     #
-    # Gets the sum of the digits of the specified number. Necessary to calculate a credit card's
-    # check digit.
+    # Gets the sum of the digits of the specified number, with every other digit doubled. Necessary
+    # to calculate a credit card's check digit.
     #
     def luhn_sum(number)
       digits = number.to_s.chars.map(&:to_i)
@@ -74,9 +84,32 @@ module Teebo
     # Generates a random number with the specified number of digits, padding the beginning with
     # '0' characters, if necessary.
     #
-    def number_to_digits(digits)
-      digits = digits.to_i
-      rand(10 ** digits).to_s.rjust(digits,'0')
+    def number_with_length(length)
+      length = length.to_i
+      rand(10 ** length).to_s.rjust(length,'0')
+    end
+
+    #
+    # Generates a Credit Card CVV code. This simply returns a random number of the length used by
+    # the specified 'issuer' object.
+    #
+    def generate_cvv_code(issuer)
+      number_with_length(issuer['cvv-length'])
+    end
+
+    #
+    # Generates an expiration date for a credit card. These dates are, somewhat arbitrarily, simply
+    # some time in the next 5 years. 
+    #
+    def generate_expiration_date
+      current_year = Time.now.year - 2000
+      month = rand(1...13)
+      if month <= Time.now.month
+        current_year += 1
+      end
+      year = rand(current_year...(current_year + 5))
+      month = month.to_s.rjust(2,'0')
+      "#{month}/#{year}"
     end
   end
 end
