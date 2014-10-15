@@ -9,7 +9,7 @@ module Teebo
     # A basic implementation of the Box-Muller transform. Adapted from an answer by antonakos on
     # Stack Overflow here: http://stackoverflow.com/questions/5825680
     #
-    def normal_dist(mean, std_deviation, rand = lambda { Kernel.rand })
+    def self.normal_dist(mean, std_deviation, rand = lambda { Kernel.rand })
       theta = 2 * Math::PI * rand.call
       rho = Math.sqrt(-2 * Math.log(1 - rand.call))
       scale = std_deviation * rho
@@ -20,7 +20,7 @@ module Teebo
     # Generates a number according to Benford's law, meaning that it is more indicative of numbers
     # encountered in real life.
     #
-    def benford_dist(upper_bound, decimals=0)
+    def self.benford_dist(upper_bound, decimals=0)
       (upper_bound**Random.rand).round(decimals)
     end
 
