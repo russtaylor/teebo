@@ -38,7 +38,7 @@ module Teebo
     # Finds the total count for the number of names in the database.
     #
     def sum_count(sex)
-      @db_connection.get_sum(GIVEN_NAMES_TABLE, 'count', {column: 'sex', condition: sex})
+      db_connection.get_sum(GIVEN_NAMES_TABLE, 'count', {column: 'sex', condition: sex})
     end
 
     #
@@ -47,7 +47,7 @@ module Teebo
     def given_name(sex)
       count = sum_count(sex)
       selection = rand(count)
-      @db_connection.get_row_for_count(GIVEN_NAMES_TABLE, 'count_to', selection,
+      db_connection.get_row_for_count(GIVEN_NAMES_TABLE, 'count_to', selection,
                                 {column: 'sex', condition: sex})['name']
     end
 
@@ -55,9 +55,9 @@ module Teebo
     # Selects a random (weighted) surname from the database.
     #
     def surname
-      count = @db_connection.get_sum(SURNAMES_TABLE, 'count')
+      count = db_connection.get_sum(SURNAMES_TABLE, 'count')
       selection = rand(count)
-      @db_connection.get_row_for_count(SURNAMES_TABLE, 'count_to', selection)['name']
+      db_connection.get_row_for_count(SURNAMES_TABLE, 'count_to', selection)['name']
     end
   end
 end

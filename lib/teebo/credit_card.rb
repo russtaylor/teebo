@@ -11,7 +11,7 @@ module Teebo
     end
 
     def self.generate_card(issuer=nil)
-      if issuer == nil
+      if issuer.nil?
         issuer = generate_issuer
       end
       [
@@ -28,7 +28,7 @@ module Teebo
     def self.generate_issuer
       random_choice = Random.rand
       full_weight = 0
-      @cc_issuers.each do |issuer|
+      issuers.each do |issuer|
         full_weight += issuer['probability']
         if random_choice < full_weight
           return issuer
