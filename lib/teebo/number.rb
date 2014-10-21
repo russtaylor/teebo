@@ -21,7 +21,8 @@ module Teebo
     # encountered in real life.
     #
     def self.benford_dist(upper_bound, decimals=0)
-      (upper_bound**Random.rand).round(decimals)
+      multiplier = Math.log(upper_bound)
+      Math.exp(Random.rand * multiplier).round(decimals)
     end
 
   end

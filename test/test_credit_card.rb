@@ -35,4 +35,14 @@ class CreditCardTest < MiniTest::Test
                  Teebo::CreditCard.last_digit_validation('21454476127445730752')
   end
 
+  def test_benford_dist
+    sum = 0
+    (1...10000).each do
+      number = Teebo::Number.benford_dist(1000)
+      puts number
+      sum += number
+    end
+    puts sum / 10000
+  end
+
 end
