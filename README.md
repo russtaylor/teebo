@@ -1,7 +1,7 @@
 Teebo
 =====
 
-![Build status](https://travis-ci.org/russtaylor/teebo.svg?branch=master)
+[![Build Status](https://travis-ci.org/russtaylor/teebo.svg?branch=master)](https://travis-ci.org/russtaylor/teebo)
 
 A Ruby gem that encompasses a wide array of data-generation functionality. It's
 made to generate high-quality data, which goes beyond mere randomness by
